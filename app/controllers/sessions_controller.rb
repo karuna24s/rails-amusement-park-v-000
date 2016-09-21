@@ -3,12 +3,19 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(name: params[:user][:name])
-    user = user.try(:authenticate, params[:user][:password])
-    return redirect_to root_path unless user
-    session[:user_id] = user.id
-    @user = user
-    redirect_to user_path(@user)
+    @user = User.find_by(:name => params[:user][:name])
+  	if @user && @user.authenticate(params[:user][:password])
+  		session[:user_id] = @user.id
+  		redirect_to user_path(@user)
+  	else
+  		redirect_to signin_path
+  	end
+    # user = User.find_by(name: params[:user][:name])
+    # user = user.try(:authenticate, params[:user][:password])
+    # return redirect_to root_path unless user
+    # session[:user_id] = user.id
+    # @user = user
+    # redirect_to user_path(@user)
   end
 
   def destroy
