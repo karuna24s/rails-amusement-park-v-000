@@ -16,7 +16,7 @@ class Ride < ActiveRecord::Base
   end
 
   def can_ride
-    user.update(
+    self.user.update(
     tickets: user.tickets - attraction.tickets,
     happiness: user.happiness + attraction.happiness_rating,
     nausea: user.nausea + attraction.nausea_rating)
