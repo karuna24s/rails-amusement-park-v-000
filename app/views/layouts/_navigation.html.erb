@@ -13,7 +13,7 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <% if logged_in? %>
-         <li><%= link_to "Hello, " + " " + current_user.name, user_path(current_user) %>!</li>
+         <li><%= link_to "Hello, #{current_user.name if current_user.name}!", user_path(current_user) %>!</li>
          <li><%= link_to "Attractions", attractions_path %></li>
          <li><%= link_to "Log Out", signout_path, method: :post %></li>
        <% else %>
